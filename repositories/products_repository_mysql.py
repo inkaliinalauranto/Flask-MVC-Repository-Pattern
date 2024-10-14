@@ -1,5 +1,6 @@
 import mysql.connector
 import os
+import models
 
 
 class ProductsRepositoryMySQL:
@@ -13,3 +14,14 @@ class ProductsRepositoryMySQL:
     def __del__(self):
         if self.con is not None and self.con.is_connected():
             self.con.close()
+
+    def get_all(self):
+        with self.con.cursor(dictionary=True) as cur:
+            cur.execute("SELECT * FROM products;")
+            result = cur.fetchall()
+            products = [models.Product(_id=product.get("id"),
+                                       name=product.get("name"),
+                                       description=product.get("description"))
+                        for product in result]
+
+            return products

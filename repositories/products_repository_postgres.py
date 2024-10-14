@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import models
 
 
 class ProductsRepositoryPostgres:
@@ -10,6 +11,18 @@ class ProductsRepositoryPostgres:
                                     f"password={os.getenv('POSTGRES_PW')}")
 
     def __del__(self):
-        if self.con is not None and self.con.is_connected:
+        # Tähän esim. try-except-blokki
+        if self.con is not None:
             self.con.close()
 
+    def get_all(self):
+        with self.con.cursor() as cur:
+            cur.execute("SELECT * FROM products;")
+            result = cur.fetchall()
+            # Palauttaa listan tupleja, esim:
+            # [(1, 'testituote1', 'Onkohan tämä lisätty tietokantaan')]
+            print(result)
+            products = [models.Product(product[0], product[1], product[2])
+                        for product in result]
+
+            return products
