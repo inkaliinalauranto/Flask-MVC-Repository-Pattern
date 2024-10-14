@@ -2,6 +2,7 @@ import os
 
 import mysql.connector
 
+import models
 from repositories.users_repository import UsersRepository
 
 
@@ -12,3 +13,10 @@ class UsersRepositoryMySQL(UsersRepository):
                                                       password=os.getenv("MYSQL_PASSWORD"))
 
         super(UsersRepositoryMySQL, self).__init__(self.con)
+
+    def add(self, username, firstname, lastname):
+        with self.con.cursor() as cur:
+            cur.execute("INSERT INTO users (username, firstname, lastname) VALUES (%s, %s, %s);",
+                        (username, firstname, lastname))
+            self.con.commit()
+            return models.User(_id=cur.lastrowid, username=username, firstname=firstname, lastname=lastname)

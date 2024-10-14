@@ -1,5 +1,6 @@
 import models
 
+
 class UsersRepository:
     # Rakentajametodi, jossa avataan tietokantayhteys:
     def __init__(self, con):
@@ -38,3 +39,5 @@ class UsersRepository:
                                 lastname=user_tuple[3])
 
             return users
+
+

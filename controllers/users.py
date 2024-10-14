@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, request
 from repositories.repository_factory import users_repository_factory
 
 
@@ -23,3 +23,14 @@ def get_user_by_id(user_id):
                  "lastname": user.lastname}
 
     return user_dict
+
+
+def add_user():
+    request_data = request.get_json()
+    repo = users_repository_factory()
+    added_user = repo.add(request_data.get("username"), request_data.get("firstname"), request_data.get("lastname"))
+
+    if added_user.id < 1:
+        return jsonify({"error": "Käyttäjän lisääminen ei onnistu"}), 500
+
+    return jsonify({"response": f"Käyttäjä lisätty id:llä {added_user.id}."}), 201
