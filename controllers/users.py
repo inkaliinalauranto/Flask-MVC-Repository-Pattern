@@ -12,3 +12,14 @@ def get_all_users():
                       for user in users]
 
     return jsonify(user_dict_list)
+
+
+def get_user_by_id(user_id):
+    repo = users_repository_factory()
+    user = repo.get_by_id(user_id)
+    user_dict = {"id": user.id,
+                 "username": user.username,
+                 "firstname": user.firstname,
+                 "lastname": user.lastname}
+
+    return user_dict

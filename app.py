@@ -1,5 +1,5 @@
 from flask import Flask
-from controllers.users import get_all_users
+from controllers.users import get_all_users, get_user_by_id
 from controllers.products import get_all_products
 from dotenv import load_dotenv
 
@@ -12,6 +12,7 @@ def hello_world():  # put application's code here
 
 
 app.add_url_rule(rule="/api/users", view_func=get_all_users)
+app.add_url_rule(rule="/api/users/<int:user_id>", view_func=get_user_by_id)
 app.add_url_rule(rule="/api/products", view_func=get_all_products)
 
 if __name__ == '__main__':
