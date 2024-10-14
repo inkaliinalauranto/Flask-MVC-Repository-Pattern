@@ -1,17 +1,16 @@
 import os
-
 import mysql.connector
 import models
 
 
 class UsersRepositoryMySQL:
-    # Rakentajafunktio, jossa avataan tietokantayhteys:
+    # Rakentajametodi, jossa avataan tietokantayhteys:
     def __init__(self):
         self.con = mysql.connector.connect(user=os.getenv("MYSQL_USER"),
                                            database=os.getenv("DB_NAME"),
                                            password=os.getenv("MYSQL_PASSWORD"))
 
-    # Tuhoajafunktio, jossa suljetaan tietokantayhteys:
+    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
     def __del__(self):
         if self.con is not None and self.con.is_connected():
             self.con.close()

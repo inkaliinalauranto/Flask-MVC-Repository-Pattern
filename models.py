@@ -6,3 +6,10 @@ class User:
         self.firstname = firstname
         self.lastname = lastname
 
+
+class Product:
+    def __init__(self, _id, name, description):
+        self.id = _id
+        self.name = name
+        self.description = description
+
