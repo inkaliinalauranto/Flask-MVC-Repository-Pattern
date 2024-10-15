@@ -1,6 +1,6 @@
 import os
 import psycopg2
-import models
+from models import Product
 
 
 class ProductsRepositoryPostgres:
@@ -10,19 +10,16 @@ class ProductsRepositoryPostgres:
                                     f"host={os.getenv('POSTGRES_HOST')} "
                                     f"password={os.getenv('POSTGRES_PW')}")
 
-    def __del__(self):
-        # Tähän esim. try-except-blokki
-        if self.con is not None:
-            self.con.close()
+        super(ProductsRepositoryPostgres, self).__init__(self.con)
 
-    def get_all(self):
+    def add(self, name, description):
         with self.con.cursor() as cur:
-            cur.execute("SELECT * FROM products;")
-            result = cur.fetchall()
-            # Palauttaa listan tupleja, esim:
-            # [(1, 'testituote1', 'Onkohan tämä lisätty tietokantaan')]
-            print(result)
-            products = [models.Product(product[0], product[1], product[2])
-                        for product in result]
+            cur.execute("INSERT INTO products (name, description "
+                        "VALUES (%s, %s) RETURNING *;", (name, description))
 
-            return products
+            self.con.commit()
+            product_tuple = cur.fetchone()
+
+            return Product(_id=product_tuple[0],
+                           name=product_tuple[1],
+                           description=product_tuple[2])

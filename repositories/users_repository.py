@@ -17,13 +17,13 @@ class UsersRepository:
     def get_all(self):
         with self.con.cursor() as cur:
             cur.execute("SELECT * FROM users;")
-            user_tuple_list = cur.fetchall()
+            users_tuple_list = cur.fetchall()
 
             users_list = [User(_id=user_tuple[0],
                                username=user_tuple[1],
                                firstname=user_tuple[2],
                                lastname=user_tuple[3])
-                          for user_tuple in user_tuple_list]
+                          for user_tuple in users_tuple_list]
 
             return users_list
 

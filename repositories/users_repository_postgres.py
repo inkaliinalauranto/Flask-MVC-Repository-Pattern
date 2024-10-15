@@ -20,9 +20,9 @@ class UsersRepositoryPostgres(UsersRepository):
                         (username, firstname, lastname))
 
             self.con.commit()
-            result = cur.fetchone()
+            user_tuple = cur.fetchone()
 
-            return User(_id=result[0],
-                        username=result[1],
-                        firstname=result[2],
-                        lastname=result[3])
+            return User(_id=user_tuple[0],
+                        username=user_tuple[1],
+                        firstname=user_tuple[2],
+                        lastname=user_tuple[3])

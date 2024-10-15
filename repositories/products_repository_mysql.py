@@ -1,6 +1,6 @@
 import mysql.connector
 import os
-import models
+from models import Product
 
 
 class ProductsRepositoryMySQL:
@@ -10,18 +10,15 @@ class ProductsRepositoryMySQL:
                                            database=os.getenv("DB_NAME"),
                                            password=os.getenv("MYSQL_PASSWORD"))
 
-    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
-    def __del__(self):
-        if self.con is not None and self.con.is_connected():
-            self.con.close()
+        super(ProductsRepositoryMySQL, self).__init__(self.con)
 
-    def get_all(self):
-        with self.con.cursor(dictionary=True) as cur:
-            cur.execute("SELECT * FROM products;")
-            result = cur.fetchall()
-            products = [models.Product(_id=product.get("id"),
-                                       name=product.get("name"),
-                                       description=product.get("description"))
-                        for product in result]
+    def add(self, name, description):
+        with self.con.cursor() as cur:
+            cur.execute("INSERT INTO products (name, description) "
+                        "VALUES (%s, %s);", (name, description))
 
-            return products
+            self.con.commit()
+
+            return Product(_id=cur.lastrowid,
+                           name=name,
+                           description=description)
