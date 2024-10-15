@@ -17,6 +17,10 @@ def get_all_users():
 def get_user_by_id(user_id):
     repo = users_repository_factory()
     user = repo.get_by_id(user_id)
+
+    if not user:
+        return jsonify({"error": f"Käyttäjää id:llä {user_id} ei ole olemassa."}), 404
+
     user_dict = {"id": user.id,
                  "username": user.username,
                  "firstname": user.firstname,
@@ -77,3 +81,14 @@ def update_user_lastname_by_id(user_id):
 
     updated_user = repo.update_by_id(user_id, user.username, user.firstname, lastname)
     return jsonify({"response": f"Käyttäjän (id: {updated_user.id}) sukunimeä muokattu."})
+
+
+def delete_by_id(user_id):
+    repo = users_repository_factory()
+    user = repo.get_by_id(user_id)
+
+    if not user:
+        return jsonify({"error": f"Käyttäjää id:llä {user_id} ei ole olemassa."}), 404
+
+    removed_user = repo.delete_by_id(user_id, user.username, user.firstname, user.lastname)
+    return jsonify({"response": f"Käyttäjä id:llä {removed_user.id} poistettu."})

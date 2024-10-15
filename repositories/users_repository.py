@@ -33,6 +33,10 @@ class UsersRepository:
         with self.con.cursor() as cur:
             cur.execute("SELECT * FROM users WHERE id = %s;", (user_id,))
             user_tuple = cur.fetchone()
+
+            if not user_tuple:
+                return None
+
             users = models.User(_id=user_tuple[0],
                                 username=user_tuple[1],
                                 firstname=user_tuple[2],
@@ -58,6 +62,15 @@ class UsersRepository:
             cur.execute("UPDATE users SET lastname = %s WHERE id = %s;",
                         (lastname, user_id,))
 
+            self.con.commit()
+            return models.User(_id=user_id,
+                               username=username,
+                               firstname=firstname,
+                               lastname=lastname)
+
+    def delete_by_id(self, user_id, username, firstname, lastname):
+        with self.con.cursor() as cur:
+            cur.execute("DELETE FROM users WHERE id = %s;", (user_id,))
             self.con.commit()
             return models.User(_id=user_id,
                                username=username,
