@@ -6,14 +6,6 @@ class UsersRepository:
     def __init__(self, con):
         self.con = con
 
-    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
-    def __del__(self):
-        # Tähän try-except-blokki, koska con-muuttujalla ei ole
-        # is_connected-metodia, joten ei voida laittaa
-        # and self.con.is_connected()
-        if self.con is not None:
-            self.con.close()
-
     def get_all(self):
         with self.con.cursor() as cur:
             cur.execute("SELECT * FROM users;")

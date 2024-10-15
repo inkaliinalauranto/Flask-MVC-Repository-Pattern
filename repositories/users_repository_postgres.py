@@ -13,6 +13,14 @@ class UsersRepositoryPostgres(UsersRepository):
 
         super(UsersRepositoryPostgres, self).__init__(self.con)
 
+    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
+    def __del__(self):
+        # Tähän try-except-blokki, koska con-muuttujalla ei ole
+        # is_connected-metodia, joten ei voida laittaa
+        # and self.con.is_connected()
+        if self.con is not None:
+            self.con.close()
+
     def add(self, username, firstname, lastname):
         with self.con.cursor() as cur:
             cur.execute("INSERT INTO users (username, firstname, lastname) "

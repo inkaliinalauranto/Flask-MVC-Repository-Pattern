@@ -12,6 +12,13 @@ class ProductsRepositoryMySQL(ProductsRepository):
                                            password=os.getenv("MYSQL_PASSWORD"))
 
         super(ProductsRepositoryMySQL, self).__init__(self.con)
+        print("ProductsRepositoryMySQL(ProductsRepository)-rakentaja: tietokantayhteys luotu")
+
+    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
+    def __del__(self):
+        if self.con is not None and self.con.is_connected():
+            self.con.close()
+            print("ProductsRepositoryMySQL(ProductsRepository)-tuhoaja: tietokantayhteys suljettu")
 
     def add(self, name, description):
         with self.con.cursor() as cur:

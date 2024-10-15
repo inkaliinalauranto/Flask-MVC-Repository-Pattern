@@ -82,7 +82,7 @@ def update_product_description_by_id(product_id):
             return jsonify({"error": "Vääränlainen request body"}), 400
 
         repo = products_repository_factory()
-        updated_product = repo.update_by_id(product_id, description)
+        updated_product = repo.update_description_by_id(product_id, description)
 
         if updated_product is None:
             return jsonify({"error": f"Tuotetta id:llä {product_id} ei ole olemassa."}), 404

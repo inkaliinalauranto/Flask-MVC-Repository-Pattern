@@ -13,9 +13,17 @@ class ProductsRepositoryPostgres(ProductsRepository):
 
         super(ProductsRepositoryPostgres, self).__init__(self.con)
 
+    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
+    def __del__(self):
+        # Tähän try-except-blokki, koska con-muuttujalla ei ole
+        # is_connected-metodia, joten ei voida laittaa
+        # and self.con.is_connected()
+        if self.con is not None:
+            self.con.close()
+
     def add(self, name, description):
         with self.con.cursor() as cur:
-            cur.execute("INSERT INTO products (name, description "
+            cur.execute("INSERT INTO products (name, description) "
                         "VALUES (%s, %s) RETURNING *;", (name, description))
 
             self.con.commit()

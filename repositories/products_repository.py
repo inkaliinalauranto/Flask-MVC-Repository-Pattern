@@ -5,13 +5,6 @@ class ProductsRepository:
     def __init__(self, con):
         self.con = con
 
-    def __del__(self):
-        # Tähän try-except-blokki, koska con-muuttujalla ei ole
-        # is_connected-metodia, joten ei voida laittaa
-        # and self.con.is_connected()
-        if self.con is not None:
-            self.con.close()
-
     def get_all(self):
         with self.con.cursor() as cur:
             cur.execute("SELECT * FROM products;")
@@ -52,7 +45,7 @@ class ProductsRepository:
                            name=name,
                            description=description)
 
-    def update_lastname_by_id(self, product_id, description):
+    def update_description_by_id(self, product_id, description):
         product = self.get_by_id(product_id)
 
         if product is None:

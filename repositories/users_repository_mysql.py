@@ -12,6 +12,11 @@ class UsersRepositoryMySQL(UsersRepository):
 
         super(UsersRepositoryMySQL, self).__init__(self.con)
 
+    # Tuhoajametodi, jossa suljetaan tietokantayhteys:
+    def __del__(self):
+        if self.con is not None and self.con.is_connected():
+            self.con.close()
+
     def add(self, username, firstname, lastname):
         with self.con.cursor() as cur:
             cur.execute("INSERT INTO users (username, firstname, lastname) "
