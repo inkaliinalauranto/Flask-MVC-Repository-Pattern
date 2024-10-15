@@ -44,7 +44,8 @@ def add_user():
 
 
 def update_user_by_id(user_id):
-    user = get_user_by_id(user_id)
+    repo = users_repository_factory()
+    user = repo.get_by_id(user_id)
 
     if not user:
         return jsonify({"error": f"Käyttäjää id:llä {user_id} ei ole olemassa."}), 404
@@ -57,6 +58,22 @@ def update_user_by_id(user_id):
     if not username or not firstname or not lastname:
         return jsonify({"error": "Vääränlainen request body"}), 400
 
-    repo = users_repository_factory()
     updated_user = repo.update_by_id(user_id, username, firstname, lastname)
     return jsonify({"response": f"Käyttäjän (id: {updated_user.id}) tietoja muokattu."})
+
+
+def update_user_lastname_by_id(user_id):
+    repo = users_repository_factory()
+    user = repo.get_by_id(user_id)
+
+    if not user:
+        return jsonify({"error": f"Käyttäjää id:llä {user_id} ei ole olemassa."}), 404
+
+    request_data = request.get_json()
+    lastname = request_data.get("lastname")
+
+    if not lastname:
+        return jsonify({"error": "Vääränlainen request body"}), 400
+
+    updated_user = repo.update_by_id(user_id, user.username, user.firstname, lastname)
+    return jsonify({"response": f"Käyttäjän (id: {updated_user.id}) sukunimeä muokattu."})

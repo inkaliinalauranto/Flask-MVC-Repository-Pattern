@@ -52,3 +52,14 @@ class UsersRepository:
                                username=username,
                                firstname=firstname,
                                lastname=lastname)
+
+    def update_lastname_by_id(self, user_id, username, firstname, lastname):
+        with self.con.cursor() as cur:
+            cur.execute("UPDATE users SET lastname = %s WHERE id = %s;",
+                        (lastname, user_id,))
+
+            self.con.commit()
+            return models.User(_id=user_id,
+                               username=username,
+                               firstname=firstname,
+                               lastname=lastname)
