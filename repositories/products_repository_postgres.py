@@ -1,9 +1,10 @@
 import os
 import psycopg2
 from models import Product
+from repositories.products_repository import ProductsRepository
 
 
-class ProductsRepositoryPostgres:
+class ProductsRepositoryPostgres(ProductsRepository):
     def __init__(self):
         self.con = psycopg2.connect(f"dbname={os.getenv('DB_NAME')} "
                                     f"user={os.getenv('POSTGRES_USER')} "

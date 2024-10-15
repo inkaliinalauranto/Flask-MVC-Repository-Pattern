@@ -1,9 +1,10 @@
+from repositories.products_repository import ProductsRepository
 import mysql.connector
 import os
 from models import Product
 
 
-class ProductsRepositoryMySQL:
+class ProductsRepositoryMySQL(ProductsRepository):
     # Rakentajametodi, jossa avataan tietokantayhteys:
     def __init__(self):
         self.con = mysql.connector.connect(user=os.getenv("MYSQL_USER"),

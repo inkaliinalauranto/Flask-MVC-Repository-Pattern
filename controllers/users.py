@@ -101,7 +101,7 @@ def update_user_lastname_by_id(user_id):
         return jsonify({"error": str(e)}), 500
 
 
-def delete_by_id(user_id):
+def delete_user_by_id(user_id):
     try:
         repo = users_repository_factory()
         removed_user = repo.delete_by_id(user_id)

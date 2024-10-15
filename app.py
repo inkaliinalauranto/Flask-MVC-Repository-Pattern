@@ -1,7 +1,8 @@
 from flask import Flask
 from controllers.users import get_all_users, get_user_by_id, add_user, update_user_by_id, update_user_lastname_by_id, \
-    delete_by_id
-from controllers.products import get_all_products
+    delete_user_by_id
+from controllers.products import get_all_products, add_product, update_product_by_id, update_product_description_by_id, \
+    delete_product_by_id
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -14,14 +15,42 @@ def hello_world():  # put application's code here
 
 app.add_url_rule(rule="/api/users", view_func=get_all_users)
 app.add_url_rule(rule="/api/users/<int:user_id>", view_func=get_user_by_id)
+
 app.add_url_rule(rule="/api/users",
                  view_func=add_user,
                  methods=["POST"])
-app.add_url_rule(rule="/api/users/<int:user_id>", view_func=update_user_by_id, methods=["PUT"])
-app.add_url_rule(rule="/api/users/<int:user_id>", view_func=update_user_lastname_by_id, methods=["PATCH"])
-app.add_url_rule(rule="/api/users/<int:user_id>", view_func=delete_by_id, methods=["DELETE"])
+
+app.add_url_rule(rule="/api/users/<int:user_id>",
+                 view_func=update_user_by_id,
+                 methods=["PUT"])
+
+app.add_url_rule(rule="/api/users/<int:user_id>",
+                 view_func=update_user_lastname_by_id,
+                 methods=["PATCH"])
+
+app.add_url_rule(rule="/api/users/<int:user_id>",
+                 view_func=delete_user_by_id,
+                 methods=["DELETE"])
 
 app.add_url_rule(rule="/api/products", view_func=get_all_products)
+
+app.add_url_rule(rule="/api/users/<int:user_id>", view_func=get_user_by_id)
+
+app.add_url_rule(rule="/api/products",
+                 view_func=add_product,
+                 methods=["POST"])
+
+app.add_url_rule(rule="/api/users/<int:product_id>",
+                 view_func=update_product_by_id,
+                 methods=["PUT"])
+
+app.add_url_rule(rule="/api/products/<int:product_id>",
+                 view_func=update_product_description_by_id,
+                 methods=["PATCH"])
+
+app.add_url_rule(rule="/api/products/<int:product_id>",
+                 view_func=delete_product_by_id,
+                 methods=["DELETE"])
 
 if __name__ == '__main__':
     load_dotenv()
