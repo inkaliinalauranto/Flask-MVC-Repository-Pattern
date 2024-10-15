@@ -1,6 +1,6 @@
 import os
 import psycopg2
-import models
+from models import User
 from repositories.users_repository import UsersRepository
 
 
@@ -18,11 +18,11 @@ class UsersRepositoryPostgres(UsersRepository):
             cur.execute("INSERT INTO users (username, firstname, lastname) "
                         "VALUES (%s, %s, %s) RETURNING *;",
                         (username, firstname, lastname))
+
             self.con.commit()
             result = cur.fetchone()
-            print(result)
-            return models.User(_id=result[0],
-                               username=result[1],
-                               firstname=result[2],
-                               lastname=result[3])
 
+            return User(_id=result[0],
+                        username=result[1],
+                        firstname=result[2],
+                        lastname=result[3])

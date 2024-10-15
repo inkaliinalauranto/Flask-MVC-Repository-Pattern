@@ -1,8 +1,6 @@
 import os
-
 import mysql.connector
-
-import models
+from models import User
 from repositories.users_repository import UsersRepository
 
 
@@ -18,9 +16,10 @@ class UsersRepositoryMySQL(UsersRepository):
         with self.con.cursor() as cur:
             cur.execute("INSERT INTO users (username, firstname, lastname) "
                         "VALUES (%s, %s, %s);", (username, firstname, lastname))
-            self.con.commit()
-            return models.User(_id=cur.lastrowid,
-                               username=username,
-                               firstname=firstname,
-                               lastname=lastname)
 
+            self.con.commit()
+
+            return User(_id=cur.lastrowid,
+                        username=username,
+                        firstname=firstname,
+                        lastname=lastname)
