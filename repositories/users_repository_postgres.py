@@ -15,10 +15,7 @@ class UsersRepositoryPostgres(UsersRepository):
 
     # Tuhoajametodi, jossa suljetaan tietokantayhteys:
     def __del__(self):
-        # Tähän try-except-blokki, koska con-muuttujalla ei ole
-        # is_connected-metodia, joten ei voida laittaa
-        # and self.con.is_connected()
-        if self.con is not None:
+        if self.con is not None and not self.con.closed:
             self.con.close()
 
     def add(self, username, firstname, lastname):
