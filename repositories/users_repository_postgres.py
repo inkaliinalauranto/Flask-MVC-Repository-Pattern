@@ -26,16 +26,3 @@ class UsersRepositoryPostgres(UsersRepository):
                                firstname=result[2],
                                lastname=result[3])
 
-    def update_by_id(self, user_id, username, firstname, lastname):
-        with self.con.cursor() as cur:
-            cur.execute("UPDATE users "
-                        "SET username = %s, firstname = %s, lastname = %s "
-                        "WHERE id = %s RETURNING *;",
-                        (username, firstname, lastname, user_id))
-
-            self.con.commit()
-            result = cur.fetchone()
-            return models.User(_id=result[0],
-                               username=result[1],
-                               firstname=result[2],
-                               lastname=result[3])

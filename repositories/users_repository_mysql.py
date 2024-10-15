@@ -16,18 +16,11 @@ class UsersRepositoryMySQL(UsersRepository):
 
     def add(self, username, firstname, lastname):
         with self.con.cursor() as cur:
-            cur.execute("INSERT INTO users (username, firstname, lastname) VALUES (%s, %s, %s);",
-                        (username, firstname, lastname))
+            cur.execute("INSERT INTO users (username, firstname, lastname) "
+                        "VALUES (%s, %s, %s);", (username, firstname, lastname))
             self.con.commit()
-            return models.User(_id=cur.lastrowid, username=username, firstname=firstname, lastname=lastname)
+            return models.User(_id=cur.lastrowid,
+                               username=username,
+                               firstname=firstname,
+                               lastname=lastname)
 
-    def update_by_id(self, user_id, username, firstname, lastname):
-        with self.con.cursor() as cur:
-            cur.execute("UPDATE users "
-                        "SET username = %s, firstname = %s, lastname = %s "
-                        "WHERE id = %s;",
-                        (username, firstname, lastname, user_id,))
-
-            self.con.commit()
-            print(f"Last row id on: {cur.lastrowid}")
-            return models.User(_id=user_id, username=username, firstname=firstname, lastname=lastname)
