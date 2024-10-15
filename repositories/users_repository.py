@@ -34,7 +34,7 @@ class UsersRepository:
             cur.execute("SELECT * FROM users WHERE id = %s;", (user_id,))
             user_tuple = cur.fetchone()
 
-            if not user_tuple:
+            if user_tuple is None:
                 return None
 
             users = models.User(_id=user_tuple[0],
@@ -45,6 +45,11 @@ class UsersRepository:
             return users
 
     def update_by_id(self, user_id, username, firstname, lastname):
+        user = self.get_by_id(user_id)
+
+        if user is None:
+            return None
+
         with self.con.cursor() as cur:
             cur.execute("UPDATE users "
                         "SET username = %s, firstname = %s, lastname = %s "
@@ -57,22 +62,33 @@ class UsersRepository:
                                firstname=firstname,
                                lastname=lastname)
 
-    def update_lastname_by_id(self, user_id, username, firstname, lastname):
+    def update_lastname_by_id(self, user_id, lastname):
+        user = self.get_by_id(user_id)
+
+        if user is None:
+            return None
+
         with self.con.cursor() as cur:
             cur.execute("UPDATE users SET lastname = %s WHERE id = %s;",
                         (lastname, user_id,))
 
             self.con.commit()
             return models.User(_id=user_id,
-                               username=username,
-                               firstname=firstname,
+                               username=user.username,
+                               firstname=user.firstname,
                                lastname=lastname)
 
-    def delete_by_id(self, user_id, username, firstname, lastname):
+    def delete_by_id(self, user_id):
+        user = self.get_by_id(user_id)
+
+        if user is None:
+            return None
+
         with self.con.cursor() as cur:
             cur.execute("DELETE FROM users WHERE id = %s;", (user_id,))
             self.con.commit()
+
             return models.User(_id=user_id,
-                               username=username,
-                               firstname=firstname,
-                               lastname=lastname)
+                               username=user.username,
+                               firstname=user.firstname,
+                               lastname=user.lastname)
