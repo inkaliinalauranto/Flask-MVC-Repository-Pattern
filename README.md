@@ -67,13 +67,13 @@ PUT-, PATCH- ja DELETE-pyynnöt lähetetään seuraaviin endpointeihin:
 
 *={id}:n tilalle syötetään valittu tunnus
 
-users-tauluun kohdistuviin POST- ja PUT-pyyntöihin on liitettävä JSON-objektimuotoinen body, josta löytyvät avaimet "username", "firstname" ja "lastname" valittuine arvoineen. 
+*users*-tauluun kohdistuviin POST- ja PUT-pyyntöihin on liitettävä *JSON*-objektimuotoinen body, josta löytyvät avaimet "username", "firstname" ja "lastname" valittuine arvoineen. 
 
-users-tauluun kohdistuviin PATCH-pyyntöihin on liitettävä JSON-objektimuotoinen body, jossa on avain "lastname" valitulla arvolla.
+*users*-tauluun kohdistuviin PATCH-pyyntöihin on liitettävä *JSON*-objektimuotoinen body, jossa on avain "lastname" valitulla arvolla.
 
-products-tauluun kohdistuviin POST- ja PUT-pyyntöihin on liitettävä JSON-objektimuotinen body, josta löytyvät avaimet "name" ja "description" arvoineen.
+*products*-tauluun kohdistuviin POST- ja PUT-pyyntöihin on liitettävä *JSON*-objektimuotinen body, josta löytyvät avaimet "name" ja "description" arvoineen.
 
-products-tauluun kohdistuviin PATCH-pyyntöihin on liitettävä JSON-objektimuotoinen body, jossa on avain "description" valitulla arvolla.
+*products*-tauluun kohdistuviin PATCH-pyyntöihin on liitettävä *JSON*-objektimuotoinen body, jossa on avain "description" valitulla arvolla.
 
 ### Esimerkkejä
 
