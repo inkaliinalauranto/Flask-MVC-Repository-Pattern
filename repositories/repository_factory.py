@@ -9,14 +9,18 @@ from repositories.users_repository_postgres import UsersRepositoryPostgres
 def users_repository_factory():
     _db = os.getenv("DB")
 
-    # Oletuksena asetetaan repo-muuttujan arvoksi instanssi
-    # UsersRepositoryMySQL-luokasta:
-    repo = UsersRepositoryMySQL()
-
-    if _db == "postgres":
-        # Jos .env-tiedoston DB-muuttujan arvo on postgres, vaihdetaan
-        # repo-muuttujan arvoksi instanssi UsersRepositoryPostgres-luokasta:
+    # Jos tietokantaohjelmistoksi on määritelty .env-tiedostossa MySQL,
+    # repo-muuttujaan luodaan instanssi MySQL-repositoriosta:
+    if _db == "mysql":
+        repo = UsersRepositoryMySQL()
+    # Jos taas tietokantaohjelmistoksi on määritelty PostgreSQL, luodaan
+    # repo-muuttujaan instanssi PostgreSQL-repositoriosta:
+    elif _db == "postgres":
         repo = UsersRepositoryPostgres()
+    # Ehdoissa oltava myös else-haara, jotta repo-muuttujalle saadaan arvo
+    # kaikenlaisissa tilanteissa:
+    else:
+        repo = UsersRepositoryMySQL()
 
     return repo
 
@@ -25,9 +29,11 @@ def users_repository_factory():
 def products_repository_factory():
     _db = os.getenv("DB")
 
-    repo = ProductsRepositoryMySQL()
-
-    if _db == "postgres":
+    if _db == "mysql":
+        repo = ProductsRepositoryMySQL()
+    elif _db == "postgres":
         repo = ProductsRepositoryPostgres()
+    else:
+        repo = ProductsRepositoryMySQL()
 
     return repo

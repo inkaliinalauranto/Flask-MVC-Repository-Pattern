@@ -4,7 +4,7 @@ from flask import jsonify, request
 
 def get_all_products():
     try:
-        # .env-tiedostossa määritellystä tietokannasta rippuen repo-muuttujaan
+        # .env-tiedostossa määritellystä tietokannasta riippuen repo-muuttujaan
         # haetaan joko UsersRepositoryMySQL()- tai
         # UsersRepositoryPostgres()-instanssi:
         repo = products_repository_factory()
@@ -75,8 +75,8 @@ def add_product():
             return jsonify({"error": "Tuotteen lisääminen ei onnistu"}), 500
 
         added_product_dict = {"id": added_product.id,
-                              "name": added_product.username,
-                              "description": added_product.firstname}
+                              "name": added_product.name,
+                              "description": added_product.description}
 
         return jsonify(added_product_dict), 201
 
@@ -104,10 +104,10 @@ def update_product_by_id(product_id):
             return jsonify({"error": f"Tuotetta id:llä {product_id} ei ole olemassa."}), 404
 
         updated_product_dict = {"id": updated_product.id,
-                                "name": updated_product.username,
-                                "description": updated_product.firstname}
+                                "name": updated_product.name,
+                                "description": updated_product.description}
 
-        return jsonify(updated_product_dict), 201
+        return jsonify(updated_product_dict)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -133,10 +133,10 @@ def update_product_description_by_id(product_id):
             return jsonify({"error": f"Tuotetta id:llä {product_id} ei ole olemassa."}), 404
 
         updated_product_dict = {"id": updated_product.id,
-                                "name": updated_product.username,
-                                "description": updated_product.firstname}
+                                "name": updated_product.name,
+                                "description": updated_product.description}
 
-        return jsonify(updated_product_dict), 201
+        return jsonify(updated_product_dict)
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -155,5 +155,6 @@ def delete_product_by_id(product_id):
 
         # Jos tuotteen poistaminen onnistuu, ei palauteta funktiosta
         # mitään, vaan annetaan statuskoodin ilmaista toiminnon onnistuminen.
+        return jsonify({"response": f"Tuote id:llä {removed_product.id} poistettu."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500

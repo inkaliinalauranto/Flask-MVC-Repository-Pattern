@@ -4,7 +4,7 @@ from repositories.repository_factory import users_repository_factory
 
 def get_all_users():
     try:
-        # .env-tiedostossa määritellystä tietokannasta rippuen repo-muuttujaan
+        # .env-tiedostossa määritellystä tietokannasta riippuen repo-muuttujaan
         # haetaan joko UsersRepositoryMySQL()- tai
         # UsersRepositoryPostgres()-instanssi:
         repo = users_repository_factory()
@@ -81,7 +81,7 @@ def add_user():
         added_user_dict = {"id": added_user.id,
                            "username": added_user.username,
                            "firstname": added_user.firstname,
-                           "lastname": added_user.lastnname}
+                           "lastname": added_user.lastname}
 
         return jsonify(added_user_dict), 201
 
@@ -162,5 +162,6 @@ def delete_user_by_id(user_id):
 
         # Jos käyttäjän poistaminen onnistuu, ei palauteta funktiosta
         # mitään, vaan annetaan statuskoodin ilmaista toiminnon onnistuminen.
+        return jsonify({"response": f"Käyttäjä id:llä {removed_user.id} poistettu."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
