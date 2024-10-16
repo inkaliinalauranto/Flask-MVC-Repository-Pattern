@@ -28,7 +28,7 @@ DB_NAME=sovelluskehykset_bad1
 MYSQL_USER=[kirjoita tähän MySQL-tietokannan käyttäjä]
 MYSQL_PW=[kirjoita tähän MySQL-tietokannan salasana, jos sellainen on. Muussa tapauksessa kirjoita: ""]
 ```
-- Jos tietokannasta löytyy versio kummallakin tietokantaohjelmistolla, voi yllä olevat muuttujat lisätä samaan *.env*-tiedostoon. Silloin *DB*-muuttujan tilalle voi kirjoittaa sen tietokantaohjelmiston nimen, jota kulloinkin on tarkoitus käyttää. Poista silloin myös **toinen** *DB_NAME*-muuttuja.
+- Jos tietokannasta löytyy versio kummallakin tietokantaohjelmistolla, voi yllä olevat muuttujat lisätä samaan *.env*-tiedostoon. Poista silloin **toinen** *DB*-muuttuja. Jäljelle jäävän *DB*-muuttujan tilalle voi kirjoittaa sen tietokantaohjelmiston nimen, jota kulloinkin on tarkoitus käyttää. Poista tässä tapauksessa myös **toinen** *DB_NAME*-muuttuja.
 - Tallenna muutokset.
 
 3. Avaa terminaali, navigoi projektin juureen ja luo virtuaaliympäristö:
