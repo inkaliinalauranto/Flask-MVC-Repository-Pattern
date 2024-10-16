@@ -160,8 +160,9 @@ def delete_user_by_id(user_id):
         if removed_user is None:
             return jsonify({"error": f"Käyttäjää id:llä {user_id} ei ole olemassa."}), 404
 
-        # Jos käyttäjän poistaminen onnistuu, ei palauteta funktiosta
-        # mitään, vaan annetaan statuskoodin ilmaista toiminnon onnistuminen.
+        # Jos käyttäjän poistaminen onnistuu, palautetaan funktiosta vastaus.
+        # Ei palauteta poistetun käyttäjän tietoja, koska käyttäjä on
+        # poistettu.
         return jsonify({"response": f"Käyttäjä id:llä {removed_user.id} poistettu."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500

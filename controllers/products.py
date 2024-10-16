@@ -153,8 +153,8 @@ def delete_product_by_id(product_id):
         if removed_product is None:
             return jsonify({"error": f"Tuotetta id:llä {product_id} ei ole olemassa."}), 404
 
-        # Jos tuotteen poistaminen onnistuu, ei palauteta funktiosta
-        # mitään, vaan annetaan statuskoodin ilmaista toiminnon onnistuminen.
+        # Jos tuotteen poistaminen onnistuu, palautetaan funktiosta vastaus.
+        # Ei palauteta poistetun tuotteen tietoja, koska tuotehan on poistettu.
         return jsonify({"response": f"Tuote id:llä {removed_product.id} poistettu."})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
