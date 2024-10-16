@@ -6,11 +6,11 @@ Jotta ohjelma toimii, tarvitaan *sovelluskehykset_bad1*-niminen MySQL- tai Postg
 ## Projektin konfigurointi Windows-käyttöjärjestelmällä
 1. Kloonaa repositorio:
 ```
-git clone https://peke.plab.fi/ilaurant/exercise1.git
+git clone https://peke.plab.fi/ilaurant/exercise2.git
 ```
 2. Avaa projekti esim. Visual Studio Codella:
 ```
-code exercise1
+code exercise2
 ```
 3. Luo vasemmassa laidassa näkyvän projektikansion tiedostopuun juureen *.env*-tiedosto. 
 - Jos käytät ohjelmaa PostgreSQL-tietokannan kanssa, lisää tiedostoon seuraavat muuttujat:
