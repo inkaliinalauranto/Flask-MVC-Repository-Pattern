@@ -1,19 +1,19 @@
 # Tehtävä 1 
 
 ## Esivaatimukset
-Jotta ohjelma toimii, tarvitaan *sovelluskehykset_bad1*-niminen MySQL- tai PostgreSQL-tietokanta tai molemmat, joissa on taulut *users* ja *products*. *users*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *username* (NN, varchar255), *firstname* (NN, varchar255) ja *lastname* (NN, varchar255). *products*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *name* (NN, varchar255) ja *description* (text).
+Jotta ohjelma toimii, tarvitaan *sovelluskehykset_bad1*-niminen *MySQL*- tai *PostgreSQL*-tietokanta tai molemmat, joissa on taulut *users* ja *products*. *users*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *username* (NN, varchar255), *firstname* (NN, varchar255) ja *lastname* (NN, varchar255). *products*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *name* (NN, varchar255) ja *description* (text).
 
 ## Projektin konfigurointi Windows-käyttöjärjestelmällä
 1. Kloonaa repositorio:
 ```
 git clone https://peke.plab.fi/ilaurant/exercise2.git
 ```
-2. Avaa projekti esim. Visual Studio Codella:
+2. Avaa projekti esim. *Visual Studio Codella*:
 ```
 code exercise2
 ```
 3. Luo vasemmassa laidassa näkyvän projektikansion tiedostopuun juureen *.env*-tiedosto. 
-- Jos käytät ohjelmaa PostgreSQL-tietokannan kanssa, lisää tiedostoon alla olevat muuttujat. Jos muuttujassa on hakasulut, täytä niiden tilalle tietokantakohtaiset arvot:
+- Jos käytät ohjelmaa *PostgreSQL*-tietokannan kanssa, lisää tiedostoon alla olevat muuttujat. Jos muuttujassa on hakasulut, täytä niiden tilalle tietokantakohtaiset arvot:
 ```
 DB=postgres
 DB_NAME=sovelluskehykset_bad1
@@ -21,14 +21,15 @@ POSTGRES_USER=[kirjoita tähän PostgreSQL-tietokannan käyttäjä]
 POSTGRES_HOST=localhost
 POSTGRES_PW=[kirjoita tähän PostgreSQL-tietokannan salasana, jos sellainen on. Muussa tapauksessa kirjoita: ""]
 ```
-- Jos käytät ohjelmaa MySQL-tietokannan kanssa, lisää tiedostoon seuraavat muuttujat:
+- Jos käytät ohjelmaa *MySQL*-tietokannan kanssa, lisää tiedostoon seuraavat muuttujat:
 ```
 DB=mysql
 DB_NAME=sovelluskehykset_bad1
 MYSQL_USER=[kirjoita tähän MySQL-tietokannan käyttäjä]
 MYSQL_PW=[kirjoita tähän MySQL-tietokannan salasana, jos sellainen on. Muussa tapauksessa kirjoita: ""]
 ```
-- Jos tietokannasta löytyy versio kummallakin tietokantaohjelmistolla, voi yllä olevat muuttujat lisätä samaan *.env*-tiedostoon. Silloin DB-muuttujan tilalle voi kirjoittaa sen tietokantaohjelmiston nimen, jota kulloinkin on tarkoitus käyttää. Poista silloin myös toinen DB_NAME-muuttuja.
+- Jos tietokannasta löytyy versio kummallakin tietokantaohjelmistolla, voi yllä olevat muuttujat lisätä samaan *.env*-tiedostoon. Silloin *DB*-muuttujan tilalle voi kirjoittaa sen tietokantaohjelmiston nimen, jota kulloinkin on tarkoitus käyttää. Poista silloin myös **toinen** *DB_NAME*-muuttuja.
+- Tallenna muutokset.
 
 3. Avaa terminaali, navigoi projektin juureen ja luo virtuaaliympäristö:
 ```
@@ -46,7 +47,7 @@ python -m pip install -r requirements.txt
 ```
 python app.py
 ```
-Käynnistä myös tietokanta, minkä jälkeen CRUD-operaatioita voi toteuttaa rajapintojen testaussovelluksella.
+Käynnistä myös tietokanta, minkä jälkeen CRUD-operaatioita voi toteuttaa rajapintojen testaussovelluksella. Jos *DB*-muuttujan arvoa vaihtaa *.env*-tiedostossa, on ohjelma käynnistettävä uudestaan, jotta tietokantaohjelmiston vaihdos astuu voimaan.
 
 ## CRUD-operaatioiden testaaminen
 
@@ -76,7 +77,7 @@ products-tauluun kohdistuviin PATCH-pyyntöihin on liitettävä JSON-objektimuot
 
 ### Esimerkkejä
 
-Esimerkeissä käytetään PostgreSQL-tietokantaa
+Esimerkeissä käytetään *PostgreSQL*-tietokantaa
 
 Tuotteiden hakeminen:
 
