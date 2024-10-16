@@ -13,7 +13,7 @@ git clone https://peke.plab.fi/ilaurant/exercise2.git
 code exercise2
 ```
 3. Luo vasemmassa laidassa näkyvän projektikansion tiedostopuun juureen *.env*-tiedosto. 
-- Jos käytät ohjelmaa PostgreSQL-tietokannan kanssa, lisää tiedostoon seuraavat muuttujat:
+- Jos käytät ohjelmaa PostgreSQL-tietokannan kanssa, lisää tiedostoon alla olevat muuttujat. Jos muuttujassa on hakasulut, täytä niiden tilalle tietokantakohtaiset arvot:
 ```
 DB=postgres
 DB_NAME=sovelluskehykset_bad1
@@ -30,7 +30,7 @@ MYSQL_PW=[kirjoita tähän MySQL-tietokannan salasana, jos sellainen on. Muussa 
 ```
 - Jos tietokannasta löytyy versio kummallakin tietokantaohjelmistolla, voi yllä olevat muuttujat lisätä samaan *.env*-tiedostoon. Silloin DB-muuttujan tilalle voi kirjoittaa sen tietokantaohjelmiston nimen, jota kulloinkin on tarkoitus käyttää. Poista silloin myös toinen DB_NAME-muuttuja.
 
-3. Avaa terminaali projektin juureen ja luo virtuaaliympäristö:
+3. Avaa terminaali, navigoi projektin juureen ja luo virtuaaliympäristö:
 ```
 python -m venv venv
 ```
