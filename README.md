@@ -1,4 +1,4 @@
-# Tehtävä 1 
+# Tehtävä 2 
 
 ## Esivaatimukset
 Jotta ohjelma toimii, tarvitaan *sovelluskehykset_bad1*-niminen *MySQL*- tai *PostgreSQL*-tietokanta tai molemmat, joissa on taulut *users* ja *products*. *users*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *username* (NN, varchar255), *firstname* (NN, varchar255) ja *lastname* (NN, varchar255). *products*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *name* (NN, varchar255) ja *description* (text).
