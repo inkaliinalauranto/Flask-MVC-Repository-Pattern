@@ -1,16 +1,14 @@
-# Tehtävä 2 
-
 ## Esivaatimukset
 Jotta ohjelma toimii, tarvitaan *sovelluskehykset_bad1*-niminen *MySQL*- tai *PostgreSQL*-tietokanta tai molemmat, joissa on taulut *users* ja *products*. *users*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *username* (NN, varchar255), *firstname* (NN, varchar255) ja *lastname* (NN, varchar255). *products*-taulussa on oltava sarakkeet *id* (PK, AI, NN, int), *name* (NN, varchar255) ja *description* (text).
 
 ## Projektin konfigurointi Windows-käyttöjärjestelmällä
 1. Kloonaa repositorio:
 ```
-git clone https://peke.plab.fi/ilaurant/exercise2.git
+git clone https://github.com/inkaliinalauranto/Flask-MVC-Repository-Pattern.git
 ```
 2. Avaa projekti esim. *Visual Studio Codella*:
 ```
-code exercise2
+code Flask-MVC-Repository-Pattern
 ```
 3. Luo vasemmassa laidassa näkyvän projektikansion tiedostopuun juureen *.env*-tiedosto. 
 - Jos käytät ohjelmaa *PostgreSQL*-tietokannan kanssa, lisää tiedostoon alla olevat muuttujat. Jos muuttujassa on hakasulut, täytä niiden tilalle tietokantakohtaiset arvot:
